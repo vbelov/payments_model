@@ -10,4 +10,12 @@ RSpec.describe Subject, type: :model do
       expect(subject.name).to eq('Математика')
     end
   end
+
+  describe '#find_by_code' do
+    it 'возвращает предмет по его коду' do
+      subject = Subject.find_by_code('math')
+      expect(subject).to be_an_instance_of(Subject)
+      expect(subject.code).to eq('math')
+    end
+  end
 end

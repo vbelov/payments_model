@@ -1,5 +1,12 @@
 products:
   - code: math
+    subject_code: math
   - code: english
+    subject_code: english
   - code: russian
+    subject_code: russian
   - code: environment
+    subject_code: environment
+  - code: count_on_the_fly
+  - code: chocolate
+  - code: pentamino

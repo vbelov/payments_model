@@ -2,6 +2,7 @@ class Product
   include Virtus.model
 
   attribute :code, String
+  attribute :subject_code, String
 
   class << self
     def all
@@ -13,5 +14,13 @@ class Product
         Product.new(product_hash)
       end
     end
+
+    def find_by_code(code)
+      all.find { |p| p.code == code }
+    end
+  end
+
+  def subject
+    Subject.find_by_code(subject_code)
   end
 end

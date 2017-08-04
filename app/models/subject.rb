@@ -14,5 +14,9 @@ class Subject
         Subject.new(subject_hash)
       end
     end
+
+    def find_by_code(code)
+      all.find { |s| s.code == code }
+    end
   end
 end
