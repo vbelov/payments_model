@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Product, type: :model do
   describe '#all' do
     it 'возвращает список всех продуктов' do

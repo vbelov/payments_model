@@ -1,0 +1,9 @@
+subjects:
+  - code: math
+    name: Математика
+  - code: english
+    name: Английский язык
+  - code: russian
+    name: Русский язык
+  - code: environment
+    name: Окружающий мир
