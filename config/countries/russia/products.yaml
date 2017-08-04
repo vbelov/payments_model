@@ -1,0 +1,5 @@
+products:
+  - code: math
+  - code: english
+  - code: russian
+  - code: environment
