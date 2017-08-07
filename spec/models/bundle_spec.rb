@@ -61,4 +61,18 @@ RSpec.describe Bundle, type: :model do
       end
     end
   end
+
+  describe '#create_order' do
+    let(:bundle) { create(:bundle) }
+    let(:student) { create(:student) }
+    let(:offer) { create(:offer, bundle: bundle) }
+
+    it 'создает заказ на основании ценового предложения для данного ученика' do
+      expect(bundle).to receive(:find_offer).and_return(offer)
+      order = bundle.create_order(student)
+      expect(order.student).to eq(student)
+      expect(order.offer).to eq(offer)
+      expect(order.price).to eq(offer.price)
+    end
+  end
 end

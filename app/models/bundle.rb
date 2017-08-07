@@ -17,4 +17,9 @@ class Bundle < ApplicationRecord
   def find_offer(student)
     offers.find { |o| o.segment.contains?(student) } || default_offer
   end
+
+  def create_order(student)
+    offer = find_offer(student)
+    Order.create!(offer: offer, student: student)
+  end
 end
