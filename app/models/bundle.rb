@@ -1,6 +1,12 @@
 class Bundle < ApplicationRecord
   has_many :offers
 
+  def add_item(product, period)
+    items_json[product.code] = period.code
+    items_json_will_change!
+    save!
+  end
+
   def items
     items_json.map do |product_code, period_code|
       BundleItem.new(product_code, period_code)
@@ -16,7 +22,7 @@ class Bundle < ApplicationRecord
 
   # noinspection RailsChecklist04
   def find_offer(student)
-    offers.find { |o| o.segment.contains?(student) } || default_offer
+    offers.select(&:segment).find { |o| o.segment.contains?(student) } || default_offer
   end
 
   def create_order(student)
