@@ -1,0 +1,19 @@
+subscription_periods:
+  - code: month
+    name: Подписка на месяц
+    handler: generic
+    days: 31
+
+  - code: half_a_year
+    name: Подписка на полгода
+    handler: generic
+    days: 186
+
+  - code: year
+    name: Подписка на год
+    handler: generic
+    days: 366
+
+  - code: until_june
+    name: Подписка до 1 июня
+    handler: until_june
