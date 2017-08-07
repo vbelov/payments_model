@@ -14,5 +14,6 @@ FactoryGirl.define do
     items_json do
       {product.code => period.code}
     end
+    price { rand(1_000) + 1 }
   end
 end
