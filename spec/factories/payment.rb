@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :payment do
-    student
     order
+    student { order.student }
     amount { order.price }
   end
 end

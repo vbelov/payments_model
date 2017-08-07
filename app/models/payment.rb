@@ -6,7 +6,7 @@ class Payment < ApplicationRecord
     if order
       if amount >= order.price
         transaction do
-          order.update!(paid: true)
+          student.apply_order(order)
           update!(processed: true)
         end
       else

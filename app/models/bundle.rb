@@ -6,6 +6,7 @@ class Bundle < ApplicationRecord
       BundleItem.new(product_code, period_code)
     end
   end
+  alias_method :bundle_items, :items
 
   def default_offer
     offer = offers.create_with(price: price).find_or_create_by!(segment: nil)

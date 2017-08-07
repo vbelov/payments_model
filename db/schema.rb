@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170807130352) do
     t.integer "region_id"
     t.integer "level"
     t.string "b2what"
+    t.json "premium_until", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

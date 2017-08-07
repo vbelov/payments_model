@@ -1,8 +1,7 @@
-require 'rails_helper'
-
 RSpec.describe Payment, type: :model do
   describe '#process' do
-    let(:order) { create(:order) }
+    let(:student) { create(:student) }
+    let(:order) { create(:order, student: student) }
     let(:payment) { create(:payment, order: order) }
 
     it 'помечает платеж как обработанный' do
@@ -13,6 +12,11 @@ RSpec.describe Payment, type: :model do
     it 'помечает заказ как оплаченный' do
       payment.process
       expect(order.paid?).to be true
+    end
+
+    it 'создает необходимые подписки' do
+      expect(payment.student).to receive(:apply_order).with(order)
+      payment.process
     end
   end
 end

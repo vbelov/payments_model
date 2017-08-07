@@ -4,6 +4,7 @@ class CreateStudents < ActiveRecord::Migration[5.1]
       t.integer :region_id
       t.integer :level
       t.string :b2what
+      t.json :premium_until, default: {}
 
       t.timestamps
     end

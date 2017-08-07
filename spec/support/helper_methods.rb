@@ -3,6 +3,10 @@ module HelperMethods
     Product.find_by_code('math')
   end
 
+  def english_product
+    Product.find_by_code('english')
+  end
+
   def count_on_the_fly
     Product.find_by_code('count_on_the_fly')
   end
