@@ -17,3 +17,7 @@ subscription_periods:
   - code: until_june
     name: Подписка до 1 июня
     handler: until_june
+
+  - code: unlimited
+    name: Бессрочная подписка
+    handler: unlimited

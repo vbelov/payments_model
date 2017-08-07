@@ -21,5 +21,9 @@ class SubscriptionPeriod
     def find_by_code(code)
       all.find { |p| p.code == code.to_s }
     end
+
+    def find_by_code!(code)
+      find_by_code(code) || raise(RuntimeError, "Subscription period with code #{code} not found")
+    end
   end
 end

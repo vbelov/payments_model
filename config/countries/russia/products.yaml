@@ -1,12 +1,25 @@
 products:
   - code: math
+    name: Математика
     subject_code: math
+
   - code: english
+    name: Английский язык
     subject_code: english
+
   - code: russian
+    name: Русский язык
     subject_code: russian
+
   - code: environment
+    name: Окружающий мир
     subject_code: environment
+
   - code: count_on_the_fly
+    name: Счет на лету
+
   - code: chocolate
+    name: Шоколадки
+
   - code: pentamino
+    name: Пентамино

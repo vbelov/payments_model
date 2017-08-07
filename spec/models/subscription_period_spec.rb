@@ -2,7 +2,7 @@ RSpec.describe SubscriptionPeriod, type: :model do
   describe '#all' do
     it 'возвращает список всех периодов подписки' do
       periods = SubscriptionPeriod.all
-      expect(periods.count).to eq(4)
+      expect(periods.count).to eq(5)
     end
   end
 

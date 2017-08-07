@@ -16,6 +16,7 @@ RSpec.describe Product, type: :model do
       product = Product.find_by_code('math')
       expect(product).to be_an_instance_of(Product)
       expect(product.code).to eq('math')
+      expect(product.name).to eq('Математика')
       expect(product.subject_code).to eq('math')
     end
   end

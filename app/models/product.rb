@@ -2,6 +2,7 @@ class Product
   include Virtus.model
 
   attribute :code, String
+  attribute :name, String
   attribute :subject_code, String
 
   class << self
@@ -17,6 +18,10 @@ class Product
 
     def find_by_code(code)
       all.find { |p| p.code == code }
+    end
+
+    def find_by_code!(code)
+      find_by_code(code) || raise(RuntimeError, "Product with code #{code} not found")
     end
   end
 
