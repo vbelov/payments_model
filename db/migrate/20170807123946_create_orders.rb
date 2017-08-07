@@ -4,6 +4,7 @@ class CreateOrders < ActiveRecord::Migration[5.1]
       t.integer :offer_id, null: false
       t.integer :student_id, null: false
       t.integer :price, null: false
+      t.boolean :paid, default: false
 
       t.timestamps
     end
