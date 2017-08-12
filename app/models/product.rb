@@ -12,7 +12,19 @@ class Product
       country_code = 'russia' # read from env
       hash = YAML.load_file("config/countries/#{country_code}/products.yaml")
       @all = hash['products'].map do |product_hash|
-        Product.new(product_hash)
+        code = product_hash['code']
+        game = product_hash['subject_code'].blank?
+        begin
+          klass = "products/#{code}".classify.constantize
+        rescue NameError
+          class_name = code.classify
+          klass = Class.new(Product) do
+            include Products::Game if game
+          end
+          Products.const_set(class_name, klass)
+        end
+
+        klass.new(product_hash)
       end
     end
 
@@ -27,5 +39,9 @@ class Product
 
   def subject
     Subject.find_by_code(subject_code)
+  end
+
+  def game?
+    is_a?(Products::Game)
   end
 end
