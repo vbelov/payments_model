@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :segment do
+  factory :simple_segment, class: Segments::SimpleSegment do
     region_ids { (1..10).to_a.shuffle.take(rand(11)) }
     payments { [-1, 0, 1].sample }
     b2what { ['b2c', 'b2t', nil].sample }

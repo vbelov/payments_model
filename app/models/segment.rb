@@ -1,17 +1,30 @@
 class Segment < ApplicationRecord
-  def contains?(student)
-    matches_region?(student) && matches_b2what?(student) && matches_level?(student)
+  class SegmentData
+    include Virtus.model
+
+    def self.dump(data)
+      data.to_hash
+    end
+
+    def self.load(data)
+      new(data)
+    end
+
+    def inspect_arrays?
+      true
+    end
   end
 
-  def matches_region?(student)
-    region_ids.blank? || region_ids.include?(student.region_id)
-  end
+  def self.segment_attributes(&block)
+    klass = Class.new(SegmentData)
+    klass.class_eval(&block)
+    const_set('Data', klass)
+    serialize :data, klass
 
-  def matches_b2what?(student)
-    (!b2what || b2what.include?(student.b2what))
-  end
-
-  def matches_level?(student)
-    levels.blank? || levels.include?(student.level)
+    klass.attribute_set.each do |attribute|
+      name = attribute.name
+      define_method(name) { data.send(name) }
+      define_method("#{name}=") { |val| data.send("#{name}=", val) }
+    end
   end
 end

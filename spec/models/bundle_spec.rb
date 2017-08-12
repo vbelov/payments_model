@@ -39,7 +39,7 @@ RSpec.describe Bundle, type: :model do
   end
 
   describe '#find_offer' do
-    let(:segment) { create(:segment) }
+    let(:segment) { create(:simple_segment) }
     let(:bundle) { create(:bundle) }
     let!(:offer) { create(:offer, bundle: bundle, segment: segment) }
 

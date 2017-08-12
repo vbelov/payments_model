@@ -23,7 +23,7 @@ describe 'Комплекный сценарий работы модели' do
     # Можно будет сделать и иначе - иметь шаблоны Сегментов, из числа которых можно выбирать при создании Предложения.
     Offer.create!(
         bundle: super_bundle,
-        segment: Segment.create!(
+        segment: Segments::SimpleSegment.create!(
             region_ids: [77],
             levels: [], # без ограничения по классу
             b2what: nil, # и b2c, и b2t
@@ -33,7 +33,7 @@ describe 'Комплекный сценарий работы модели' do
 
     Offer.create!(
         bundle: super_bundle,
-        segment: Segment.create!(
+        segment: Segments::SimpleSegment.create!(
             region_ids: [5, 6, 7, 8, 9],
             levels: [1],
             b2what: 'b2c',

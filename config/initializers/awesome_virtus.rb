@@ -24,7 +24,7 @@ module AwesomeVirtus
       name = name.to_s[1..-1].to_sym
       val = object.send(name)
       if val.is_a?(Array)
-        val = '[ ... ]'
+        val = '[ ... ]' unless object.respond_to?(:inspect_arrays?) && object.inspect_arrays?
       end
       hash[name] = val
       hash
