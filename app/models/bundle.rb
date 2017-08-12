@@ -3,7 +3,6 @@ class Bundle < ApplicationRecord
 
   def add_item(product, period)
     items_json[product.code] = period.code
-    items_json_will_change!
     save!
   end
 

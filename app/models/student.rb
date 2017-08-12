@@ -20,7 +20,6 @@ class Student < ApplicationRecord
         order.bundle_items.each do |bundle_item|
           update_subscription(bundle_item)
         end
-        premium_until_will_change!
         save!
         order.update!(paid: true)
       end
