@@ -24,4 +24,11 @@ RSpec.describe Segment, type: :model do
       expect(segment.reload.amount).to eq(new_amount)
     end
   end
+
+  describe '#all_types' do
+    it 'возвращает список доступных типов сегментов' do
+      expect(Segment.all_types).to include(Segments::SimpleSegment)
+      expect(Segment.all_types).to include(Segments::StudentIdWithinRange)
+    end
+  end
 end

@@ -27,4 +27,11 @@ class Segment < ApplicationRecord
       define_method("#{name}=") { |val| data.send("#{name}=", val) }
     end
   end
+
+  def self.all_types
+    @all_types ||= Dir['app/models/segments/*.rb'].map do |path|
+      filename = File.basename(path, '.rb')
+      "segments/#{filename}".classify.constantize
+    end
+  end
 end
