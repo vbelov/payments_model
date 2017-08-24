@@ -19,9 +19,18 @@ class Bundle < ApplicationRecord
     offer
   end
 
+  def permanent_offers
+    offers.select(&:permanent?)
+  end
+
+  def test_offers
+    offers.select(&:test?)
+  end
+
   # noinspection RailsChecklist04
   def find_offer(student)
-    offers.select(&:segment).find { |o| o.segment.contains?(student) } || default_offer
+    offers_in_order = test_offers + permanent_offers.select(&:segment)
+    offers_in_order.find { |o| o.matches?(student) } || default_offer
   end
 
   def create_order(student)

@@ -60,6 +60,28 @@ RSpec.describe Bundle, type: :model do
         expect(best_offer).to eq(bundle.default_offer)
       end
     end
+
+    context 'если для сегмента студента есть постоянное предложение и AB-тестовое' do
+      let(:student_within_segment) { create_matching_student(segment) }
+      let(:price_a) { rand(1_000) }
+      let(:price_b) { rand(1_000) }
+      let!(:ab_test) do
+        create(
+            :payment_ab_test,
+            segment: segment,
+            groups_count: 2,
+            bundles: {
+                bundle => { a: price_a, b: price_b }
+            }
+        )
+      end
+
+      it 'возвращает AB-тестовое предложение' do
+        best_offer = bundle.find_offer(student_within_segment)
+        expect(best_offer.payment_ab_test).to eq(ab_test)
+        expect(best_offer.price).to eq(price_a)
+      end
+    end
   end
 
   describe '#create_order' do

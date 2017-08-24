@@ -52,4 +52,26 @@ RSpec.describe Student, type: :model do
       expect(s2.end_date).to eq(Date.new(2100, 1, 1))
     end
   end
+
+  describe '#ab_group' do
+    let(:ab_test) { create(:ab_test) }
+
+    context 'если студент попадает в сегмент AB-теста' do
+      let(:student) { create_matching_student(ab_test.segment) }
+
+      it 'возвращает группу AB-теста' do
+        expect(ab_test).to receive(:next_group).once.and_return('a')
+        2.times { expect(student.ab_group(ab_test)).to eq('a') }
+      end
+    end
+
+    context 'если студент не попадает в сегмент AB-теста' do
+      let(:student) { create_non_matching_student(ab_test.segment) }
+
+      it 'возвращает nil' do
+        expect(ab_test).not_to receive(:next_group)
+        expect(student.ab_group(ab_test)).to eq(nil)
+      end
+    end
+  end
 end

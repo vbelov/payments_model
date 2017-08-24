@@ -26,6 +26,19 @@ class Student < ApplicationRecord
     end
   end
 
+  def ab_group(ab_test)
+    test_id = ab_test.id.to_s
+    if ab_groups.key?(test_id)
+      ab_groups[test_id]
+    else
+      group = ab_test.segment.contains?(self) ? ab_test.next_group : nil
+      ab_groups[test_id] = group
+      save!
+
+      group
+    end
+  end
+
   private
 
   def update_subscription(bundle_item)

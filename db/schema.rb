@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807130352) do
+ActiveRecord::Schema.define(version: 20170824112349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ab_tests", force: :cascade do |t|
+    t.string "type"
+    t.integer "segment_id"
+    t.integer "groups_count"
+    t.json "participants", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "bundles", force: :cascade do |t|
     t.string "name"
@@ -29,6 +38,9 @@ ActiveRecord::Schema.define(version: 20170807130352) do
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "payment_ab_test_id"
+    t.string "ab_group"
+    t.index ["payment_ab_test_id"], name: "index_offers_on_payment_ab_test_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -63,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170807130352) do
     t.json "premium_until", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "ab_groups", default: {}
   end
 
 end
