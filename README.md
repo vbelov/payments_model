@@ -1,5 +1,7 @@
 # Модель подсистемы премиум подписок для образовательной платформы
 
+[![Build Status](https://travis-ci.org/vbelov/payments_model.svg?branch=master)](https://travis-ci.org/vbelov/payments_model)
+
 ## Требования
 
 Речь идет о некоторой образовательной платформе, на которой пользователи (студенты) могут покупать доступ 
