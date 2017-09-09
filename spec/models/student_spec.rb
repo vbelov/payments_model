@@ -1,7 +1,7 @@
 RSpec.describe Student, type: :model do
   describe '#subscriptions' do
     let(:end_date) { 1.month.from_now.to_date }
-    let(:student) { create(:student, premium_until: { math: end_date }) }
+    let(:student) { create(:student, subscriptions_json: { math: end_date }) }
 
     it 'возвращает список подписок' do
       expect(student.subscriptions.count).to eq(1)
@@ -10,7 +10,7 @@ RSpec.describe Student, type: :model do
 
   describe '#find_subscription' do
     let(:end_date) { 1.month.from_now.to_date }
-    let(:student) { create(:student, premium_until: { math: end_date }) }
+    let(:student) { create(:student, subscriptions_json: { math: end_date }) }
 
     it 'возвращает подписку на запрошенный продукт' do
       subscription = student.find_subscription(math_product)

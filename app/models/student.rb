@@ -1,6 +1,6 @@
 class Student < ApplicationRecord
   def subscriptions
-    premium_until.map do |product_code, premium_end_string|
+    subscriptions_json.map do |product_code, premium_end_string|
       Subscription.new(
           student: self,
           product: Product.find_by_code!(product_code),
@@ -43,8 +43,8 @@ class Student < ApplicationRecord
 
   def update_subscription(bundle_item)
     product_code = bundle_item.product.code
-    date = premium_until[product_code]&.to_date || Date.today
+    date = subscriptions_json[product_code]&.to_date || Date.today
     new_date = bundle_item.subscription_period.from(date)
-    self.premium_until[product_code] = new_date.to_s
+    self.subscriptions_json[product_code] = new_date.to_s
   end
 end
