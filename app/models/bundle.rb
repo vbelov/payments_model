@@ -1,9 +1,12 @@
 class Bundle < ApplicationRecord
   has_many :offers
 
+  validates :name, presence: true
+
   def add_item(product, period)
     items_json[product.code] = period.code
     save!
+    self
   end
 
   def items

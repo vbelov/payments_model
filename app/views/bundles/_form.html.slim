@@ -1,0 +1,21 @@
+= form_for @bundle, html: { class: "form form-horizontal bundle" } do |f|
+  .form-group
+    = f.label :name, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :name, :class => 'form-control'
+    = f.error_span(:name)
+  .form-group
+    = f.label :items_json, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :items_json, :class => 'form-control'
+    = f.error_span(:items_json)
+  .form-group
+    = f.label :price, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :price, :class => 'form-control'
+    = f.error_span(:price)
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit nil, :class => 'btn btn-primary'
+      '
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), bundles_path, :class => 'btn'
