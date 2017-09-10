@@ -1,6 +1,15 @@
 class SubscriptionPeriod
   attr_reader :code, :name
 
+  class NotFound < RuntimeError
+    attr_reader :period_code
+
+    def initialize(message, code)
+      super(message)
+      @period_code = code
+    end
+  end
+
   def initialize(options)
     @code = options['code']
     @name = options['name']
@@ -23,7 +32,7 @@ class SubscriptionPeriod
     end
 
     def find_by_code!(code)
-      find_by_code(code) || raise(RuntimeError, "Subscription period with code #{code} not found")
+      find_by_code(code) || raise(NotFound.new("Subscription period with code #{code} not found", code))
     end
   end
 end

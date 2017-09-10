@@ -1,4 +1,38 @@
 RSpec.describe Bundle, type: :model do
+  describe '#add_item' do
+    let(:bundle) { bundle = create(:bundle, items_json: {}) }
+    let(:bundle_item) { build(:bundle_item) }
+
+    it 'добавляет элемент, но не сохраняет бандл' do
+      bundle.add_item(bundle_item.product.code, bundle_item.subscription_period.code)
+      expect(bundle.items.first).to eq(bundle_item)
+      expect(bundle.reload.items.count).to eq(0)
+    end
+  end
+
+  describe '#add_item!' do
+    let(:bundle) { bundle = create(:bundle, items_json: {}) }
+    let(:bundle_item) { build(:bundle_item) }
+
+    it 'добавляет элемент и сохраняет бандл' do
+      bundle.add_item!(bundle_item.product.code, bundle_item.subscription_period.code)
+      expect(bundle.reload.items.count).to eq(1)
+      expect(bundle.items.first).to eq(bundle_item)
+    end
+  end
+
+  describe '#set_items' do
+    let(:bundle) { bundle = create(:bundle) }
+    let(:bundle_items) { build_list(:bundle_item, 2) }
+
+    it 'изменяет список элементов' do
+      expect {
+        bundle.set_items(bundle_items.map(&:to_h))
+      }.to change { bundle.items.count }.from(1).to(2)
+      expect(bundle.items).to match_array(bundle_items)
+    end
+  end
+
   describe '#items' do
     let(:bundle) do
       create(:bundle,

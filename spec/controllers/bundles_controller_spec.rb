@@ -97,7 +97,7 @@ RSpec.describe BundlesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        attributes_for(:bundle)
+        attributes_for(:bundle).merge(name: 'new name')
       }
 
       it "updates the requested bundle" do

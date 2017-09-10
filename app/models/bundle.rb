@@ -3,10 +3,20 @@ class Bundle < ApplicationRecord
 
   validates :name, presence: true
 
-  def add_item(product, period)
-    items_json[product.code] = period.code
-    save!
+  def add_item(*args)
+    item = BundleItem.new(*args)
+    items_json[item.product.code] = item.subscription_period.code
     self
+  end
+
+  def add_item!(product, period)
+    add_item(product, period).tap(&:save!)
+  end
+
+  def set_items(items)
+    items_json.clear
+    items.each { |item| add_item(item) }
+    save!
   end
 
   def items

@@ -3,4 +3,10 @@ Rails.application.routes.draw do
   root to: 'application#root'
 
   resources :bundles
+
+  namespace :api do
+    namespace :v1 do
+      jsonapi_resources :bundles
+    end
+  end
 end

@@ -12,19 +12,19 @@ until_june = SubscriptionPeriod.find_by_code!('until_june')
 Bundle.create!(
     name: 'Математика на месяц',
     price: 100
-).add_item(math, month)
+).add_item!(math, month)
 
 Bundle.create!(
     name: 'Математика на год',
     price: 800
-).add_item(math, year)
+).add_item!(math, year)
 
 Bundle.create!(
     name: 'Игра "Счет на лету"',
     price: 200
-).add_item(count_on_the_fly, unlimited)
+).add_item!(count_on_the_fly, unlimited)
 
 Bundle.create!(
     name: 'Математика на год и игра "Счет на лету" в подарок',
     price: 900
-).add_item(math, year).add_item(count_on_the_fly, unlimited)
+).add_item!(math, year).add_item!(count_on_the_fly, unlimited)

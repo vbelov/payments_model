@@ -5,6 +5,15 @@ class Product
   attribute :name, String
   attribute :subject_code, String
 
+  class NotFound < RuntimeError
+    attr_reader :product_code
+
+    def initialize(message, code)
+      super(message)
+      @product_code = code
+    end
+  end
+
   class << self
     def all
       return @all if @all
@@ -33,7 +42,7 @@ class Product
     end
 
     def find_by_code!(code)
-      find_by_code(code) || raise(RuntimeError, "Product with code #{code} not found")
+      find_by_code(code) || raise(NotFound.new("Product with code #{code} not found", code))
     end
   end
 

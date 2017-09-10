@@ -15,9 +15,9 @@ describe 'Комплекный сценарий работы модели' do
         name: 'Математика на год, Английский до 1 июня и игра "Счет на лету" в подарок',
         price: 900 # цена по умолчанию
     )
-    super_bundle.add_item(math, year)
-    super_bundle.add_item(count_on_the_fly, unlimited)
-    super_bundle.add_item(english, until_june)
+    super_bundle.add_item!(math, year)
+    super_bundle.add_item!(count_on_the_fly, unlimited)
+    super_bundle.add_item!(english, until_june)
 
     # Предложения можно создавать через админку. При создании Предложения создаем Сегмент.
     # Можно будет сделать и иначе - иметь шаблоны Сегментов, из числа которых можно выбирать при создании Предложения.
