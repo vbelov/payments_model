@@ -1,4 +1,22 @@
 module ApiV1Helpers
+  def v1_list(klass)
+    type = klass.name.tableize
+    get "/api/v1/#{type}"
+    v1_check_errors
+  end
+
+  def v1_show(object)
+    endpoint =
+        if object.is_a?(Product)
+          "/api/v1/products/#{object.code}"
+        else
+          type = object.class.name.tableize
+          "/api/v1/#{type}/#{object.id}"
+        end
+    get endpoint
+    v1_check_errors
+  end
+
   def v1_create(klass, attributes)
     type = klass.name.tableize
     data = {data: {type: type, attributes: attributes}}
@@ -45,6 +63,7 @@ module ApiV1Helpers
       meta = v1_response['errors'].first['meta']
       puts meta['exception']
       meta['backtrace'].each { |l| puts l }
+      fail meta['exception']
     end
   end
 
