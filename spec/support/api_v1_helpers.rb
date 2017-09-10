@@ -1,6 +1,6 @@
 module ApiV1Helpers
   def v1_list(klass)
-    type = klass.name.tableize
+    type = klass.name.tableize.dasherize
     get "/api/v1/#{type}"
     v1_check_errors
   end
@@ -9,6 +9,8 @@ module ApiV1Helpers
     endpoint =
         if object.is_a?(Product)
           "/api/v1/products/#{object.code}"
+        elsif object.is_a?(SubscriptionPeriod)
+          "/api/v1/subscription-periods/#{object.code}"
         else
           type = object.class.name.tableize
           "/api/v1/#{type}/#{object.id}"

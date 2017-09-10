@@ -23,12 +23,12 @@ RSpec.describe Bundle, type: :model do
 
   describe '#set_items' do
     let(:bundle) { bundle = create(:bundle) }
-    let(:bundle_items) { build_list(:bundle_item, 2) }
+    let(:bundle_items) { build_list(:bundle_item, 2).uniq }
 
     it 'изменяет список элементов' do
       expect {
         bundle.set_items(bundle_items.map(&:to_h))
-      }.to change { bundle.items.count }.from(1).to(2)
+      }.to change { bundle.items.count }.from(1).to(bundle_items.count)
       expect(bundle.items).to match_array(bundle_items)
     end
   end
