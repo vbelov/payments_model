@@ -19,5 +19,14 @@ module Payments
       g.template_engine :slim
       g.helper false
     end
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 methods: [:get, :post, :put, :patch, :options]
+      end
+    end
   end
 end

@@ -27,6 +27,7 @@ gem 'uglifier', '>= 1.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'jsonapi-resources'
+gem 'rack-cors'
 
 # ==== model ====
 gem 'virtus'
